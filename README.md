@@ -19,26 +19,32 @@ git clone https://github.com/wekan/wekan-mongodb.git
 cd wekan-mongodb
 ```
 
-3a) Detached mode:
+3) Copy .env.dist to .env and edit .env file with your config
+
+```bash
+cp .env.dist .env
+```
+
+4a) Detached mode:
 
 ```bash
 docker-compose up -d
 ```
 
-3b) Running attached to console, so Ctrl-c stops it:
+4b) Running attached to console, so Ctrl-c stops it:
 
 ```bash
 docker-compose up
 ```
 
-4) Wekan is at http://localhost (port 80)
+5) Wekan is at http://localhost (port 80)
 
-5) MongoDB is at 127.0.0.1:27017
+6) MongoDB is at 127.0.0.1:27017
 
-6) Wekan and databases bind to address 0.0.0.0 so could be also available to other
+7) Wekan and databases bind to address 0.0.0.0 so could be also available to other
    computers in network. I have not tested this.
 
-7) [Restore your MongoDB data](https://github.com/wekan/wekan/wiki/Export-Docker-Mongo-Data).
+8) [Restore your MongoDB data](https://github.com/wekan/wekan/wiki/Export-Docker-Mongo-Data).
 
 ## Backup before upgrading
 
