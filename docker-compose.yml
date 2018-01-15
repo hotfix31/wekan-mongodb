@@ -49,13 +49,14 @@ services:
     volumes:
       - wekan-db:/data/db
       - wekan-db-dump:/dump
+    env_file: .env
 
   wekan:
     # Wekan container only has Node.js and related code,
     # there is no data stored here.
     #
     # Old Wekan that uses Node 4.8.6 and Meteor 1.4:
-    image: wekanteam/wekan:latest
+    image: wekanteam/wekan:${WEKAN_VERSION}
     # New Wekan that uses Node 6.12 and Meteor 1.6:
     # image: wekanteam/wekan:meteor-1.6
     container_name: wekan-app
@@ -65,7 +66,7 @@ services:
     #---------------------------------------------------------------
     # For running Wekan in different port like 3000, use: 3000:80
     ports:
-      - 80:80
+      - ${WEKAN_PORT_EXPOSE}
     #---------------------------------------------------------------
     # Change ROOT_URL to your real Wekan URL, for example:
     #   http://example.com
@@ -80,13 +81,9 @@ services:
     #   you could also have setup Wekan Node.js port at localhost
     #   with setting: PORT=3000
     #   and have Nginx proxy to port 3000, see Wekan wiki.
-    environment:
-      - MONGO_URL=mongodb://wekandb:27017/wekan
-      - ROOT_URL=http://example.com
-      - MAIL_URL=smtp://user:pass@mailserver.example.com:25/
-      - MAIL_FROM='Example Wekan Support <support@example.com>'
     depends_on:
       - wekandb
+    env_file: .env
 
 #------------------------------------------------------------------
 #  When using Wekan both at office LAN and remote VPN:
